@@ -42,27 +42,40 @@
 </form>
 <hr>
 <h2>Reading</h2>
-<?php 
+<table id="productTable">
+    <thead>
+        <th>ID </th>
+        <th>Product Name </th>
+        <th>Product Price </th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+    </thead>
+    <tbody>    
+    <?php 
     $select = $pdo->prepare('select * from tbl_product');
     $select->execute();
-    echo"<pre>";
     
     //we can use fetchall() to select all data and withot a loop and also using a diferent scopes
     //$row = $select->fetch(PDO::FETCH_OBJ);
     //print_r($row);
 
+
     while($row = $select->fetch(PDO::FETCH_OBJ)){
         //echo $row[1]."<br>"; fetch(PDO::FETCH_NUM
         //echo $row['productName']."<br>"; fetch(PDO::FETCH_ASSOC
         //echo $row->productName."<br>"; fetch(PDO::FETCH_OBJ
-        echo 'Product Id:'.$row->id_product.' Product Name:'.$row->productName.' product Price:'.$row->productPrice."<hr>";
-        
-        //print_r($row);
+        echo '
+        <tr>
+            <td>'.$row->id_product.'</td>
+            <td>'.$row->productName.'</td>
+            <td>'.$row->productPrice.'</td>
+            <td><button type="submit" value="'.$row->id_product.'">EDIT</button></td>
+            <td><button type="submit" value="'.$row->id_product.'">DELETE</button></td>
+        </tr>    
+        ';
     }
-
-  
-
-?>
-
+    ?>
+    </tbody>
+</table>
 </body>
 </html>
