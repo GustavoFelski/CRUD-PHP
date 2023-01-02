@@ -35,11 +35,40 @@
 <body>
 <h2>Insert</h2>
 <form action="" method="post">
+
+    <!--UPDATE -->
+    <?php
+        flush();
+        if(isset($_POST['btnEdit'])){
+            $select = $pdo->prepare("select * from tbl_product where id_product=".$_POST['btnEdit']);
+            $select->execute();
+            if($select){
+                $row = $select->fetch(PDO::FETCH_OBJ);
+                echo'
+                    <p><input type="hidden" name="IdProduct" value="'.$row->id_product.'"></p>
+                    <p><input type="text" name="txtName" value="'.$row->productName.'"></p>
+                    <p><input type="text" name="txtPrice" value="'.$row->productPrice.'"></p>
+                    <p><input type="submit" value="save" name="btnSave"></p>
+                ';
+
+            }
+
+        }else{
+            echo '
+                <p><input type="text" name="txtName" placeholder="Product Name"></p>
+                <p><input type="text" name="txtPrice" placeholder="Product price"></p>
+                <p><input type="submit" value="save" name="btnSave"></p>
+            ';
+        }
+
+    ?>
+    <!--
     <p><input type="text" name="txtName" placeholder="Product Name"></p>
     <p><input type="text" name="txtPrice" placeholder="Product price"></p>
-    <p><input type="submit" value="save" name="btnSave"></p>
+    -->
     
-</form>
+    
+
 <hr>
 <h2>Reading</h2>
 <table id="productTable">
@@ -69,13 +98,16 @@
             <td>'.$row->id_product.'</td>
             <td>'.$row->productName.'</td>
             <td>'.$row->productPrice.'</td>
-            <td><button type="submit" value="'.$row->id_product.'">EDIT</button></td>
-            <td><button type="submit" value="'.$row->id_product.'">DELETE</button></td>
+            
+            
+            <td><button type="submit" name="btnEdit" value="'.$row->id_product.'">EDIT</button></td>
+            <td><button type="submit" name="btnDelete" value="'.$row->id_product.'">DELETE</button></td>
         </tr>    
         ';
     }
     ?>
     </tbody>
 </table>
+</form>
 </body>
 </html>
