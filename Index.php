@@ -21,6 +21,49 @@
             echo'TextBox Empty';
         }
     }
+    if(isset($_POST['btnUpdate'])){
+        $PName  = $_POST['txtName'];
+        $PPrice = $_POST['txtPrice'];
+        $PId = $_POST['IdProduct'];
+
+        if(!empty($PName && $PPrice)){
+            /*
+            $update = $pdo->prepare("update tbl_product set productName=:name , productPrice=:price) where id_product =".$Pid;
+            $updade->bindParam(':name', $PName);
+            $updade->bindParam(':price', $PPrice);
+
+            $updade->execute();
+            if ($updade->rowCount()){
+                echo'update successful';
+            }else
+                echo'update fail';
+            */
+        }else{
+            echo'TextBox Empty';
+        }
+    }
+    if(isset($_POST['btnCancel'])){
+        $PName  = $_POST['txtName'];
+        $PPrice = $_POST['txtPrice'];
+    
+
+        if(!empty($PName && $PPrice)){
+            
+            /*$insert = $pdo->prepare("insert into tbl_product(productName,productPrice) values (:name,:price)");
+            $insert->bindParam(':name', $PName);
+            $insert->bindParam(':price', $PPrice);
+
+            $insert->execute();
+            if ($insert->rowCount()){
+                echo'insert successful';
+            }else
+                echo'insert fail';
+            */
+        }else{
+            echo'TextBox Empty';
+        }
+    }
+    
 
 ?>
 
@@ -48,7 +91,9 @@
                     <p><input type="hidden" name="IdProduct" value="'.$row->id_product.'"></p>
                     <p><input type="text" name="txtName" value="'.$row->productName.'"></p>
                     <p><input type="text" name="txtPrice" value="'.$row->productPrice.'"></p>
-                    <p><input type="submit" value="save" name="btnSave"></p>
+                    <button type="submit" name="btnUpdate" >Update</button>
+                    <button type="submit" name="btnCancel" >Cancel</button>
+                    
                 ';
 
             }
@@ -66,9 +111,8 @@
     <p><input type="text" name="txtName" placeholder="Product Name"></p>
     <p><input type="text" name="txtPrice" placeholder="Product price"></p>
     -->
-    
-    
-
+</form>
+<form action="" method="post">
 <hr>
 <h2>Reading</h2>
 <table id="productTable">
