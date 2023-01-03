@@ -27,20 +27,21 @@
         $PId = $_POST['IdProduct'];
 
         if(!empty($PName && $PPrice)){
-            /*
-            $update = $pdo->prepare("update tbl_product set productName=:name , productPrice=:price) where id_product =".$Pid;
-            $updade->bindParam(':name', $PName);
-            $updade->bindParam(':price', $PPrice);
+            
+            $update = $pdo->prepare("update tbl_product set productName=:name , productPrice=:price where id_product =".$PId);
+            $update->bindParam(':name', $PName);
+            $update->bindParam(':price', $PPrice);
 
-            $updade->execute();
-            if ($updade->rowCount()){
+            $update->execute();
+            if ($update->rowCount()){
                 echo'update successful';
-            }else
+            }
+            else{
                 echo'update fail';
-            */
-        }else{
-            echo'TextBox Empty';
+            }
         }
+        
+
     }
     if(isset($_POST['btnCancel'])){
         $PName  = $_POST['txtName'];
