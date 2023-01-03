@@ -43,29 +43,19 @@
         
 
     }
-    if(isset($_POST['btnCancel'])){
-        $PName  = $_POST['txtName'];
-        $PPrice = $_POST['txtPrice'];
-    
+    if(isset($_POST['btnDelete'])){
 
-        if(!empty($PName && $PPrice)){
+        $delete = $pdo->prepare("delete  from tbl_product WHERE id_product=".$_POST['btnDelete']);
+        $delete->execute();
+
+        if ($delete->rowCount()){
+            echo'this item was deleted';
+        }else
+            echo'delete fail';
             
-            /*$insert = $pdo->prepare("insert into tbl_product(productName,productPrice) values (:name,:price)");
-            $insert->bindParam(':name', $PName);
-            $insert->bindParam(':price', $PPrice);
-
-            $insert->execute();
-            if ($insert->rowCount()){
-                echo'insert successful';
-            }else
-                echo'insert fail';
-            */
-        }else{
-            echo'TextBox Empty';
-        }
+    }else{
+        echo 'erro!';
     }
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +83,7 @@
                     <p><input type="text" name="txtName" value="'.$row->productName.'"></p>
                     <p><input type="text" name="txtPrice" value="'.$row->productPrice.'"></p>
                     <button type="submit" name="btnUpdate" >Update</button>
-                    <button type="submit" name="btnCancel" >Cancel</button>
+                    <button type="submit" name="btnDelete" >Delete</button>
                     
                 ';
 
